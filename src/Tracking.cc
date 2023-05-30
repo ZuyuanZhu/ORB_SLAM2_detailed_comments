@@ -984,7 +984,7 @@ void Tracking::CreateInitialMapMonocular()
     KeyFrame* pKFini = new KeyFrame(mInitialFrame,mpMap,mpKeyFrameDB);  // 第一帧
     KeyFrame* pKFcur = new KeyFrame(mCurrentFrame,mpMap,mpKeyFrameDB);  // 第二帧
 
-    // Step 1 将初始关键帧,当前关键帧的描述子转为BoW
+    // Step 1 将初始关键帧,当前关键帧的描述子转为BoW, similar as grid, works as cluster classifier, used for quicker search
     pKFini->ComputeBoW();
     pKFcur->ComputeBoW();
 

@@ -351,6 +351,23 @@ bool LoopClosing::DetectLoop()
  * @return true         只要有一个候选关键帧通过Sim3的求解与优化，就返回true
  * @return false        所有候选关键帧与当前关键帧都没有有效Sim3变换
  */
+ /*
+ Sim(3) (or similarity transformation in 3 dimensions) is often used to describe the transformation 
+ between two coordinate frames, including both rotation and translation, as well as a scale factor.
+
+In more technical terms, Sim(3) is a set of transformations that preserve "shape", but allow for scaling, 
+rotation, and translation. It's particularly useful when dealing with metric scale ambiguity, such as when 
+the real-world size of an object or distance is not known.
+
+Sim(3) includes a 3D rotation matrix, a 3D translation vector, and a single scale factor. So, it's more
+ general than SE(3), the set of rigid transformations in 3D (rotation and translation but no scaling), 
+ and is often used in SLAM when scaling must be accounted for, such as monocular SLAM, where the scale is 
+ unknown due to the lack of depth information.
+
+In practice, Sim(3) can be represented by a 4x4 matrix, similar to how SE(3) transformations are often 
+represented. However, the Sim(3) matrix has a scaling factor in the last diagonal element, which the SE(3)
+ matrix does not. This scale factor represents the ratio of distances in the two coordinate frames.
+ */
 bool LoopClosing::ComputeSim3()
 {
     // Sim3 计算流程说明：
